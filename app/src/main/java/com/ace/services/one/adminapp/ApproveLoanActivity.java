@@ -3,9 +3,7 @@ package com.ace.services.one.adminapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import com.ace.services.one.adminapp.adapters.ApproveLoanAdapter;
 import com.ace.services.one.adminapp.fragments.LoanDetailsFragment;

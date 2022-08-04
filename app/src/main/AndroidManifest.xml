@@ -16,6 +16,24 @@
         android:theme="@style/Theme.AdminApp"
         tools:targetApi="31">
         <activity
+            android:name=".TransactionDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TransactionsListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignInActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".UsersListActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddLinksActivity"
             android:exported="false" />
         <activity

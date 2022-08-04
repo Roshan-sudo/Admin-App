@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/drawable/ic_arrow.xml" value="0.24" />
+        <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/drawable/ic_phone.xml" value="0.24" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/drawable/ic_time.xml" value="0.228" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_add_links.xml" value="0.25416666666666665" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_approve_loan.xml" value="0.25416666666666665" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_kyc_verification.xml" value="0.25416666666666665" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_sign_in.xml" value="0.25416666666666665" />
+        <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_transaction_details.xml" value="0.24010416666666667" />
+        <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_transactions_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/activity_users_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/fragment_kyc_verification.xml" value="0.25416666666666665" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/fragment_loan_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Apps/trial/AdminApp/app/src/main/res/layout/fragment_to_be_approved_loans.xml" value="0.25416666666666665" />

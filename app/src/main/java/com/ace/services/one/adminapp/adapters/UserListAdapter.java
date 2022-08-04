@@ -12,11 +12,11 @@ import com.ace.services.one.adminapp.R;
 
 import java.util.List;
 
-public class ToBeApproveLoansAdapter extends RecyclerView.Adapter<ToBeApproveLoansAdapter.MyViewHolder> {
+public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyViewHolder> {
     private final List<String> phoneNosList;
     private OnItemClickListener mListener;
 
-    public ToBeApproveLoansAdapter(List<String> phoneNosList) {
+    public UserListAdapter(List<String> phoneNosList) {
         this.phoneNosList = phoneNosList;
     }
 
@@ -60,6 +60,5 @@ public class ToBeApproveLoansAdapter extends RecyclerView.Adapter<ToBeApproveLoa
         }
     }
 }
-
 
 

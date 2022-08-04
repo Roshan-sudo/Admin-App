@@ -2,123 +2,45 @@ package com.ace.services.one.adminapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.ace.services.one.adminapp.adapters.MainActivityAdapter;
-import com.ace.services.one.adminapp.fragments.KycVerificationFragment;
-import com.ace.services.one.adminapp.fragments.ToBeApprovedLoansFragment;
-import com.ace.services.one.adminapp.models.LoansModel;
-import com.ace.services.one.adminapp.models.RequestLoanModel;
-import com.ace.services.one.adminapp.models.UserModel;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import java.util.Map;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int KYC_NOT_VERIFIED = 0;
-
     public static final int AD_LINK = 0;
     public static final int HELP_LINK = 1;
     public static final int KYC_LINK = 2;
-
-    // XML Components
-    private TabLayout tabLayout;
-    private ViewPager2 viewPager2;
-
-    public static Map<String, String> kycList = new HashMap<>();
-    public static Map<String, String> toBeApproveList = new HashMap<>();
-    public static LoansModel loansModel;
-    public static RequestLoanModel requestLoanModel;
-    public static UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Firebase Initialization
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-
         // Link XML Components
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager2 = findViewById(R.id.viewPager);
+        Button btn_kyc = findViewById(R.id.btn_kyc);
+        Button btn_approve = findViewById(R.id.btn_approve);
+        Button btn_update = findViewById(R.id.btn_update);
 
-        // Add tabs to tabLayout
-        tabLayout.addTab(tabLayout.newTab().setText("KYC Verification"));
-        tabLayout.addTab(tabLayout.newTab().setText("To Be Approved"));
-
-        // Fetch Data from Database
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                kycList.clear();
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    userModel = dataSnapshot.child("ProfileActivity").getValue(UserModel.class);
-                    requestLoanModel = dataSnapshot.child("RequestLoanActivity").getValue(RequestLoanModel.class);
-                    assert userModel != null;
-                    if (userModel.getKycStatus() == KYC_NOT_VERIFIED)
-                        kycList.put(userModel.getPhone(), userModel.getUserId());
-                    else {
-                        for (DataSnapshot loan : dataSnapshot.child("Loans").getChildren()){
-                            loansModel = loan.getValue(LoansModel.class);
-                            assert loansModel != null;
-                            if (!loansModel.isApproved()){
-                                toBeApproveList.put(userModel.getPhone(), userModel.getUserId());
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                // initialize fragment adapter
-                MainActivityAdapter fragmentAdapter = new MainActivityAdapter(getSupportFragmentManager(), getLifecycle());
-                fragmentAdapter.addFragment(new KycVerificationFragment());
-                fragmentAdapter.addFragment(new ToBeApprovedLoansFragment());
-                viewPager2.setAdapter(fragmentAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+        // Click listener on "KYC Verification" button
+        btn_kyc.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, UsersListActivity.class);
+            intent.putExtra("nextActivity", "kycVerification");
+            startActivity(intent);
         });
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager2.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+        // Click listener on "Approve Loan" button
+        btn_approve.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, UsersListActivity.class);
+            intent.putExtra("nextActivity", "approveLoan");
+            startActivity(intent);
         });
 
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                tabLayout.selectTab(tabLayout.getTabAt(position));
-            }
-        });
+        // Click Listener On "Update Transaction" Button
+        btn_update.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, TransactionsListActivity.class)));
     }
 
     @Override

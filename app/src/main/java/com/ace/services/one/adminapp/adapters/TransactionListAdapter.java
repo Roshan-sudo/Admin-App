@@ -9,19 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ace.services.one.adminapp.R;
+import com.ace.services.one.adminapp.models.TransactionModel;
 
 import java.util.List;
 
-public class KycVerificationAdapter extends RecyclerView.Adapter<KycVerificationAdapter.MyViewHolder> {
-    private final List<String> phoneNosList;
+public class TransactionListAdapter extends RecyclerView.Adapter<TransactionListAdapter.MyViewHolder> {
+    private final List<TransactionModel> transactionModelLists;
     private OnItemClickListener mListener;
 
-    public KycVerificationAdapter(List<String> phoneNosList) {
-        this.phoneNosList = phoneNosList;
+    public TransactionListAdapter(List<TransactionModel> transactionModelLists) {
+        this.transactionModelLists = transactionModelLists;
     }
 
     // Interface to detect click listener on list items
-    public interface OnItemClickListener{ void OnItemClick(String phoneNo); }
+    public interface OnItemClickListener{ void OnItemClick(int position); }
     public void setOnItemClickListener(OnItemClickListener listener){ this.mListener = listener; }
 
     @NonNull
@@ -33,15 +34,15 @@ public class KycVerificationAdapter extends RecyclerView.Adapter<KycVerification
 
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull MyViewHolder holder, int position) {
-        holder.listText.setText(phoneNosList.get(position));
+        holder.listText.setText(String.format("Transaction ID : %s", transactionModelLists.get(position).getTransactionId()));
     }
 
     @Override
     public int getItemCount() {
-        return phoneNosList.size();
+        return transactionModelLists.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         private final TextView listText;
         public MyViewHolder(@NonNull @org.jetbrains.annotations.NotNull View itemView, OnItemClickListener listener) {
             super(itemView);
@@ -50,15 +51,16 @@ public class KycVerificationAdapter extends RecyclerView.Adapter<KycVerification
             listText = itemView.findViewById(R.id.listText);
 
             itemView.setOnClickListener(v -> {
-                if (listener != null) {
+                if (listener != null){
                     int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        listener.OnItemClick(phoneNosList.get(position));
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.OnItemClick(position);
                     }
                 }
             });
         }
     }
 }
+
 
 

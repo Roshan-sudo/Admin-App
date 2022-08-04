@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ace.services.one.adminapp.MainActivity;
 import com.ace.services.one.adminapp.R;
+import com.ace.services.one.adminapp.UsersListActivity;
 
 public class UserDetailsFragment extends Fragment {
 
@@ -35,11 +35,11 @@ public class UserDetailsFragment extends Fragment {
         TextView course = view.findViewById(R.id.course);
         TextView institute = view.findViewById(R.id.institute);
 
-        user_id.setText(MainActivity.userModel.getUserId());
-        name.setText(MainActivity.userModel.getName());
-        phone_no.setText(MainActivity.userModel.getPhone());
-        course.setText(MainActivity.userModel.getCourse());
-        institute.setText(MainActivity.userModel.getInstitute());
+        user_id.setText(UsersListActivity.userModel.getUserId());
+        name.setText(UsersListActivity.userModel.getName());
+        phone_no.setText(UsersListActivity.userModel.getPhone());
+        course.setText(UsersListActivity.userModel.getCourse());
+        institute.setText(UsersListActivity.userModel.getInstitute());
 
         return view;
     }

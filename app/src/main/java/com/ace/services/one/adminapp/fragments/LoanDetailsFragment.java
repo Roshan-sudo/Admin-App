@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ace.services.one.adminapp.MainActivity;
 import com.ace.services.one.adminapp.R;
+import com.ace.services.one.adminapp.UsersListActivity;
 import com.ace.services.one.adminapp.models.PassbookModel;
 import com.ace.services.one.adminapp.models.UpcomingEmiModel;
 import com.google.firebase.database.DatabaseReference;
@@ -63,10 +63,10 @@ public class LoanDetailsFragment extends Fragment {
         // Firebase Database Initialization
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 
-        loan_amount.setText(String.format("₹ %s", MainActivity.loansModel.getLoanAmount()));
-        loan_tenure.setText(String.format(Locale.ENGLISH, "%d Months", MainActivity.loansModel.getLoanTenure()));
-        interest_rate.setText(String.format("%s%%", MainActivity.requestLoanModel.getInterestRate()));
-        processing_fee_rate.setText(String.format("%s%%", MainActivity.requestLoanModel.getProcessingFeeRate()));
+        loan_amount.setText(String.format("₹ %s", UsersListActivity.loansModel.getLoanAmount()));
+        loan_tenure.setText(String.format(Locale.ENGLISH, "%d Months", UsersListActivity.loansModel.getLoanTenure()));
+        interest_rate.setText(String.format("%s%%", UsersListActivity.requestLoanModel.getInterestRate()));
+        processing_fee_rate.setText(String.format("%s%%", UsersListActivity.requestLoanModel.getProcessingFeeRate()));
 
         btnApprove.setOnClickListener(view1 -> {
             // Update the user selected values (loan amount and tenure) to database
@@ -74,8 +74,8 @@ public class LoanDetailsFragment extends Fragment {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
             String currentDate = formatter.format(LocalDate.now());
 
-            UpcomingEmiModel upcomingEmiModel = new UpcomingEmiModel(MainActivity.loansModel.getLoanAmount(), getEmiDate(1), loanId);
-            PassbookModel passbookModel = new PassbookModel(MainActivity.loansModel.getLoanTenure(), true, currentDate, loanId);
+            UpcomingEmiModel upcomingEmiModel = new UpcomingEmiModel(UsersListActivity.loansModel.getLoanAmount(), getEmiDate(1), loanId);
+            PassbookModel passbookModel = new PassbookModel(UsersListActivity.loansModel.getLoanTenure(), true, currentDate, loanId);
             assert loanId != null;
             databaseReference.child("HomeActivity").child(loanId).setValue(upcomingEmiModel);
             databaseReference.child("PassbookActivity").child(loanId).setValue(passbookModel);
